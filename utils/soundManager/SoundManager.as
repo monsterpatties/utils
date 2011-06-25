@@ -46,6 +46,8 @@ package com.monsterPatties.utils.soundManager
 		private var _bgmOff:Boolean;
 		private var _sfxOff:Boolean;
 		private var _soundManagerEvent:SoundManagerEvent;
+		
+		private var _bgmIsPlaying:Boolean;		
 		/*-------------------------------------------------------------------Constructor---------------------------------------------------------------------*/	
 		
 		public function SoundManager ( enforcer:SingletonEnforcer ) {
@@ -69,9 +71,14 @@ package com.monsterPatties.utils.soundManager
 		public function destroy():void 
 		{			
 			trace( "Sound Manager Garbage Has been collected!" );
-		}
+		}		
 		
 		/*-------------------------------------------------------------------Methods---------------------------------------------------------------------*/	
+		
+		public function refreshSoundManager():void 
+		{
+			_bgmIsPlaying = false;			
+		}
 		
 		private function prepareTransform():void 
 		{
@@ -80,7 +87,7 @@ package com.monsterPatties.utils.soundManager
 		}
 		
 		public function selectBgMusic( whichBgMusic:int ):void 
-		{
+		{			
 			_whichBgMusic = whichBgMusic;			
 			if( whichBgMusic <  SoundManagerConfig.BGM_LIST.length  ){
 				_bgMusicSound = SoundManagerConfig.BGM_LIST[ whichBgMusic ];
@@ -89,34 +96,88 @@ package com.monsterPatties.utils.soundManager
 			}
 		}
 		
-		public function SetVolume( vol:Number = 1 ):void 
+		public function SetBgmVolume( vol:Number = 1 ):void 
 		{
 			_bgmVol = vol;
-			_bgSoundTransForm.volume = vol;
+			_bgSoundTransForm.volume = _bgmVol;
 			if( _soundChannelBg != null  ){
 				_soundChannelBg.soundTransform = _bgSoundTransForm;
 			}
 		}
 		
+		public function increaseVolume():void 
+		{
+			
+			if ( _bgmVol < 2 ) {
+				_bgmVol += 0.1;
+			}else {
+				_bgmVol = 2;
+			}
+			
+			_bgSoundTransForm.volume = _bgmVol;
+			if( _soundChannelBg != null  ){
+				_soundChannelBg.soundTransform = _bgSoundTransForm;
+			}
+			
+			if ( _sfxVol < 2 ) {
+				_sfxVol += 0.1;
+			}else {
+				_sfxVol = 2;
+			}			
+			
+			_sfxSoundTransForm.volume = _sfxVol;
+			if( _soundEffectChannel_1 != null ){
+				_soundEffectChannel_1.soundTransform = _sfxSoundTransForm;
+			}
+		}
+		
+		public function decreaseVolume():void 
+		{
+			if( _bgmVol > 0 ){
+				_bgmVol -= 0.1;				
+			}else {
+				_bgmVol = 0;
+			}
+			
+			_bgSoundTransForm.volume = _bgmVol;
+			if( _soundChannelBg != null  ){
+				_soundChannelBg.soundTransform = _bgSoundTransForm;
+			}
+			
+			if( _sfxVol > 0 ){
+				_sfxVol -= 0.1;				
+			}else {
+				_sfxVol = 0;
+			}
+			
+			_sfxSoundTransForm.volume = _sfxVol;
+			if( _soundEffectChannel_1 != null ){
+				_soundEffectChannel_1.soundTransform = _sfxSoundTransForm;
+			}
+		}
+		
 		
 		public function playBgMusic( loop:Boolean = true ):void
-		{			
-			_loopBgMusic = loop;
-			
-			if ( _bgMusicSound != null  ) {
-				try 
-				{
-					stopBgMusic();		
-					_soundChannelBg = new SoundChannel();
-					_soundChannelBg = _bgMusicSound.play();
-					_soundChannelBg.soundTransform = _bgSoundTransForm;
-					_soundChannelBg.addEventListener( Event.SOUND_COMPLETE, onBgMusicComplete );					
-				}catch (err:Error)
-				{
-					_soundChannelBg = _bgMusicSound.play();
-					trace( "soundManager Error: ", err, "soundChannelbgm",_soundChannelBg, "bgmS",_bgMusicSound  );
-				}
+		{	
+			if ( !_bgmIsPlaying ) {
+				_bgmIsPlaying = true;
+				_loopBgMusic = loop;
 				
+				if ( _bgMusicSound != null  ) {
+					try 
+					{
+						stopBgMusic();		
+						_soundChannelBg = new SoundChannel();
+						_soundChannelBg = _bgMusicSound.play();
+						_soundChannelBg.soundTransform = _bgSoundTransForm;
+						_soundChannelBg.addEventListener( Event.SOUND_COMPLETE, onBgMusicComplete );					
+					}catch (err:Error)
+					{
+						_soundChannelBg = _bgMusicSound.play();
+						trace( "soundManager Error: ", err, "soundChannelbgm",_soundChannelBg, "bgmS",_bgMusicSound  );
+					}
+					
+				}
 			}
 		}		
 		
