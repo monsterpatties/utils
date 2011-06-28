@@ -3,72 +3,36 @@ package com.monsterPatties.utils.displayManager
 	import com.monsterPatties.utils.interfaces.IWindow;
 	import flash.display.MovieClip;
 	import flash.display.Sprite;
+	import flash.display.StageScaleMode;
 	/**
 	 * ...
-	 * @author jc
+	 * @author monsterpatties
 	 */
 	public class Window extends Sprite implements IWindow
 	{
 		
 		/*------------------------------------------------------------Constant------------------------------------------------------------*/
 		
-		/*------------------------------------------------------------Properties------------------------------------------------------------*/
-		private var _windowBg:MovieClip;
+		/*------------------------------------------------------------Properties------------------------------------------------------------*/		
 		private var _windowName:String;
 		private var _winWidth:Number;
-		private var _winHeight:Number;
-		private var _hideWindowName:Boolean;
+		private var _winHeight:Number;		
 		/*------------------------------------------------------------Constructor------------------------------------------------------------*/
 		
-		public function Window( windowName:String, winWidth:Number = 0, winHeight:Number = 0, hideWindowName:Boolean = false ) 
+		public function Window( windowName:String, winWidth:Number = 0, winHeight:Number = 0 ) 
 		{		
-			//trace( _winWidth, _winHeight );
-			_hideWindowName = hideWindowName;
+			//trace( _winWidth, _winHeight );			
 			_winWidth = winWidth;
 			_winHeight = winHeight
 			_windowName = windowName;
 		}
 		
-		/*------------------------------------------------------------Mehods------------------------------------------------------------*/	 
-		
-		public function addWindowBg( windowBg:MovieClip ):void 
-		{
-			_windowBg = windowBg;			
-			addChild( _windowBg );
-			
-			if( _windowBg.txtWindowName != null ){
-				_windowBg.txtWindowName.text = _windowName;
-				if( _hideWindowName ){
-					_windowBg.txtWindowName.visible = false;
-				}else {
-					_windowBg.txtWindowName.visible = true;
-				}
-			}			
-			
-			if ( _winWidth == 0 || _winHeight == 0 ) {
-				_winWidth = _windowBg.width;
-				_winHeight = _windowBg.height;
-			}
-			
-			_windowBg.width = _winWidth;
-			_windowBg.height = _winHeight;
-			trace( _windowBg.width, _windowBg.height );
-		}
-		
-		public function removeWindowBg():void 
-		{
-			if ( _windowBg != null ) {
-				
-				if ( this.contains( _windowBg ) ){
-					this.removeChild( _windowBg );
-					_windowBg = null;
-				}
-			}
-		}		
+		/*------------------------------------------------------------Mehods------------------------------------------------------------*/	 		
 		
 		public function initWindow():void 
 		{
 			//init some thinsg here.......
+			setUpStage();
 		}
 		
 		public function clearWindow():void 
@@ -76,6 +40,14 @@ package com.monsterPatties.utils.displayManager
 			//clear some thinsg here.......
 		}
 		
+		private function setUpStage():void 
+		{	
+			if ( stage != null ){				
+				stage.stageFocusRect = false;
+				stage.scaleMode = StageScaleMode.NO_SCALE;
+				stage.focus = this;
+			}
+		}	
 		/*------------------------------------------------------------Setters------------------------------------------------------------*/
 		public function set windowName(value:String):void 
 		{
