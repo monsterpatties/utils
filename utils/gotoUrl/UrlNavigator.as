@@ -1,4 +1,4 @@
-package com.monsterPatties.utils.gotoUrl 
+package com.surnia.socialStar.utils.gotoUrl 
 {
 	import flash.net.navigateToURL;
 	import flash.net.URLRequest;

@@ -1,6 +1,6 @@
 package com.monsterPatties.utils.displayManager 
-{	
-	import com.monsterPatties.utils.interfaces.IWindow;
+{		
+	import com.monsterPatties.utils.interfaces.IWindow;	
 	import flash.display.MovieClip;
 	import flash.display.Sprite;
 	import flash.display.StageScaleMode;

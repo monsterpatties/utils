@@ -1,4 +1,4 @@
-package com.monsterPatties.utils.keyboardManager.events 
+package com.surnia.socialStar.utils.keyboardManager.events 
 {
 	import flash.events.Event;
 	

@@ -1,4 +1,4 @@
-package com.monsterPatties.utils.assetLoader.data 
+package com.surnia.socialStar.utils.assetLoader.data 
 {
 	import flash.display.Bitmap;
 	/**

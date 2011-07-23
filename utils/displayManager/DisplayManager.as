@@ -1,6 +1,6 @@
 ﻿package com.monsterPatties.utils.displayManager
-{
-	import com.monsterPatties.utils.displayManager.event.DisplayManagerEvent;
+{	
+	import com.monsterPatties.utils.displayManager.event.DisplayManagerEvent;	
 	import flash.display.DisplayObject;
 	import flash.display.Sprite;
 	import flash.events.Event;	
@@ -16,11 +16,7 @@
 		/*---------------------------------------------------------------Properties---------------------------------------------------------------*/		
 		private var _displayManagerHolder:Sprite;		
 		private var _currentScreen:Window;
-		private var _screens:Array;
-		
-		private var _popUpWindows:Array;
-		private var _popUpWindowHolder:Sprite;
-		private var _currentPopUpWindow:Window;
+		private var _screens:Array;	
 		
 		private var _displayManagerEvent:DisplayManagerEvent;
 		/*-----------------------------------------------------------------Constructor----------------------------------------------------------*/
@@ -41,13 +37,11 @@
 			addEventListener( Event.REMOVED_FROM_STAGE , collectGarbage );
 			removeEventListener( Event.ADDED_TO_STAGE , init );						
 			
-			addDisplayManagerHolder();			
-			preparePopUpWindowHolder();
+			addDisplayManagerHolder();
 			trace( "init displayManager" );			
 		}
 		
-		public function destroy():void {
-			removePopUpWindowHolder();			
+		public function destroy():void {			
 			removeDisplayManagerHolder();			
 		}	
 		
@@ -83,33 +77,6 @@
 					//trace( whichScreen +  " has been loaded.. ", "childCount", this.numChildren );
 				}
 			}
-		}
-		
-		
-		public function loadPopUpWindow( whichPopUpWindow:String ):void {
-			
-			removeCurrentPopUpWindow();
-			
-			if ( !searchPopUpWindow( whichPopUpWindow, false, true ) ) {
-				//trace( whichPopUpWindow + " Does not exist..." );
-			}else{			
-				if( _currentPopUpWindow != null && _popUpWindowHolder != null ){
-					_popUpWindowHolder.addChild( _currentPopUpWindow );					
-					//trace(whichPopUpWindow +  " has been loaded.. ", "childCount", _popUpWindowHolder.numChildren );
-				}
-			}
-		}
-		
-		
-		private function removeCurrentPopUpWindow():void {			
-			if ( _currentPopUpWindow != null ) {
-				if ( _popUpWindowHolder.contains( _currentPopUpWindow ) ) {					
-					_popUpWindowHolder.removeChild( _currentPopUpWindow );					
-					//trace( _currentPopUpWindow.windowName +  " has been remove.");
-					_currentPopUpWindow = null;					
-					//trace( "current Screen: " + _currentPopUpWindow );
-				}
-			}			
 		}	
 		
 		public function addScreen( screen:Window ):void 
@@ -121,18 +88,6 @@
 				throw( "That Window is Already Exists!" );
 			}
 			//trace( "screen count: ",_screens.length );
-		}
-		
-		public function addPopWindow( popUpWindow:Window ):void 
-		{			
-			if ( !searchPopUpWindow( popUpWindow.windowName ) ) {				
-				popUpWindow.addEventListener( DisplayManagerEvent.REMOVE_POP_UP_WINDOW, onRemovePopUpWindow );
-				_popUpWindows.push( popUpWindow );				
-				//trace( "added PopUpWindow", popUpWindow.windowName );
-			}else {
-				//trace( "That PopUpWindow is Already Exists!" );
-			}
-			//trace( "popUpWindow count: ",_popUpWindows.length );
 		}	
 		
 		public function removeScreen( whichScreen:String ):void 
@@ -144,18 +99,7 @@
 				//trace( whichScreen + " does not exists!!" );
 			}
 			//trace( "# of screen after remove", _screens.length );
-		}	
-		
-		public function removePopUpWindow( whichPopUpWindow:String ):void 
-		{
-			//trace( "# of screen before remove", _popUpWindows.length );
-			if ( searchPopUpWindow( whichPopUpWindow, true ) ) {
-				//trace( whichPopUpWindow + " has been removed!!" );
-			}else {
-				//trace( whichPopUpWindow + " does not exists!!" );
-			}
-			//trace( "# PopUpWindows of  after remove", _popUpWindows.length );
-		}
+		}		
 		
 		private function searchScreen( screenName:String , remove:Boolean = false, load:Boolean =false ):Boolean 
 		{
@@ -174,45 +118,7 @@
 				}
 			}
 			return found;			
-		}
-		
-		private function preparePopUpWindowHolder():void 
-		{
-			_popUpWindows = new Array();
-			_popUpWindowHolder = new Sprite();
-			addChild( _popUpWindowHolder );
-		}
-		
-		private function removePopUpWindowHolder():void 
-		{
-			_popUpWindows.splice( 0 );
-			_popUpWindows = null;
-			if ( _popUpWindowHolder != null ) {
-				if ( this.contains( _popUpWindowHolder ) ) {
-					this.removeChild( _popUpWindowHolder );
-					_popUpWindowHolder = null;
-				}
-			}
-		}
-		
-		private function searchPopUpWindow( screenName:String , remove:Boolean = false, load:Boolean =false ):Boolean 
-		{
-			var found:Boolean = false;
-			for (var i:int = 0; i < _popUpWindows.length; i++)
-			{
-				if ( _popUpWindows[ i ].windowName ==  screenName ){
-					found = true;
-					if ( remove ) {
-						_popUpWindows[ i ].destroy();
-						_popUpWindows.splice( i, 1 );
-					}else if ( load ){
-						_currentPopUpWindow = _popUpWindows[ i ];
-					}
-					break;
-				}
-			}
-			return found;
-		}
+		}		
 		
 		/*--------------------------------------------------------Getters--------------------------------------------------------------------*/		
 		public function get currentScreen():Window { return _currentScreen; }
@@ -221,11 +127,7 @@
 		{
 			_currentScreen = value;
 		}
-		/*-------------------------------------------------------EventHandler----------------------------------------------------------------*/		
-		private function onRemovePopUpWindow(e:DisplayManagerEvent):void 
-		{
-			removePopUpWindow( e.windowName );
-		}
+		/*-------------------------------------------------------EventHandler----------------------------------------------------------------*/				
 		
 		private function collectGarbage ( e:Event ):void 
 		{

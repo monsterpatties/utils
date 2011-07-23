@@ -1,7 +1,7 @@
 package com.monsterPatties.utils.soundManager 
-{	
-	import com.monsterPatties.utils.soundManager.config.SoundManagerConfig;	
-	import com.monsterPatties.utils.soundManager.events.SoundManagerEvent;
+{		
+	import com.monsterPatties.utils.soundManager.config.SoundManagerConfig;
+	import com.monsterPatties.utils.soundManager.events.SoundManagerEvent;	
 	import flash.events.Event;
 	import flash.events.EventDispatcher;
 	import flash.events.SampleDataEvent;
@@ -334,7 +334,8 @@ package com.monsterPatties.utils.soundManager
 		
 		private function onBgMusicComplete ( e:Event ):void 
 		{			
-			trace( "bg1Complte!" );			
+			trace( "bg1Complte!" );	
+			refreshSoundManager();
 			if( _loopBgMusic ){
 				playBgMusic( );
 			}			

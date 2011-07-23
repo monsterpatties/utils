@@ -1,4 +1,4 @@
-﻿package com.monsterPatties.utils.displayManager.config
+﻿package com.surnia.socialStar.utils.displayManager.config
 {
 	/**
 	 * ...

@@ -1,5 +1,5 @@
 package com.monsterPatties.utils.buttonManager 
-{
+{		
 	import com.monsterPatties.utils.buttonManager.events.ButtonEvent;
 	import flash.events.EventDispatcher;
 	import flash.events.MouseEvent;
@@ -61,8 +61,7 @@ package com.monsterPatties.utils.buttonManager
 			
 			for each ( var obj:* in _buttons ) 
 			{				
-				if ( btnName == obj.name ) {
-					obj.gotoAndStop( 1 );
+				if ( btnName == obj.name ) {					
 					_buttonEvent = new ButtonEvent( ButtonEvent.ROLL_OUT_BUTTON );					
 					_buttonEvent.obj.name = obj.name;
 					dispatchEvent( _buttonEvent );
@@ -77,8 +76,7 @@ package com.monsterPatties.utils.buttonManager
 			
 			for each ( var obj:* in _buttons ) 
 			{				
-				if ( btnName == obj.name ) {
-					obj.gotoAndStop( 2 );
+				if ( btnName == obj.name ){					
 					_buttonEvent = new ButtonEvent( ButtonEvent.ROLL_OVER_BUTTON );					
 					_buttonEvent.obj.name = obj.name;
 					dispatchEvent( _buttonEvent );
@@ -108,8 +106,7 @@ package com.monsterPatties.utils.buttonManager
 			
 			for each ( var obj:* in _buttons ) 
 			{				
-				if ( btnName == obj.name ){
-					obj.gotoAndStop( 3 );
+				if ( btnName == obj.name ){					
 					break;
 				}
 			}

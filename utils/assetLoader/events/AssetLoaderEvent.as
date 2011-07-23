@@ -1,4 +1,4 @@
-package com.monsterPatties.utils.assetLoader.events 
+package com.surnia.socialStar.utils.assetLoader.events 
 {
 	import flash.events.Event;
 	

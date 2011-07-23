@@ -1,4 +1,4 @@
-package com.monsterPatties.utils.facebookAPI.events 
+package com.surnia.socialStar.utils.facebookAPI.events 
 {
 	import flash.events.Event;
 	

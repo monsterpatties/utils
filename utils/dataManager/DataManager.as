@@ -1,8 +1,9 @@
-package com.monsterPatties.utils.dataManager 
+package com.surnia.socialStar.utils.dataManager 
 {
 	import com.adobe.serialization.json.JSON;	
 	import flash.events.Event;
 	import flash.events.IOErrorEvent;
+	import flash.events.ProgressEvent;
 	import flash.net.navigateToURL;
 	import flash.net.URLLoader;
 	import flash.net.URLLoaderDataFormat;
@@ -23,6 +24,7 @@ package com.monsterPatties.utils.dataManager
 		private var _loader:URLLoader;
 		private var _urlLoaderFormat:Boolean;
 		private var _jsonMode:Boolean;
+		
 		/*---------------------------------------------------------------Constructor--------------------------------------------------------------------*/
 		
 		
@@ -35,8 +37,9 @@ package com.monsterPatties.utils.dataManager
 		{
 			_loader = new URLLoader();
 			_loader.addEventListener(Event.COMPLETE, onDataComplete );
+			_loader.addEventListener(ProgressEvent.PROGRESS, onProgress );
 			_loader.addEventListener( IOErrorEvent.IO_ERROR, onIOError  );
-		}				
+		}						
 		
 		public function sendRequestVariables( url:String , urlLoaderFormat:Boolean = false, jsonMode:Boolean = false ):void 
 		{
@@ -118,6 +121,12 @@ package com.monsterPatties.utils.dataManager
 		private function onIOError(e:IOErrorEvent):void 
 		{
 			trace( "There's IO Error!!..." );
+		}
+		
+		private function onProgress(e:ProgressEvent):void 
+		{
+			var percent:Number = e.bytesLoaded / e.bytesTotal;
+			trace( "loaded", percent );
 		}
 	}
 

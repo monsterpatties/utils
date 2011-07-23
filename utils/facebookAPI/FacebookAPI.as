@@ -1,12 +1,11 @@
-package com.monsterPatties.utils.facebookAPI 
+package com.surnia.socialStar.utils.facebookAPI 
 {	
 	import com.adobe.serialization.json.JSON;
 	import com.facebook.graph.Facebook;
+	import com.monsterPatties.data.FbData;
 	import com.monsterPatties.utils.assetLoader.AssetLoader;
 	import com.monsterPatties.utils.assetLoader.events.AssetLoaderEvent;
-	import com.monsterPatties.utils.facebookAPI.events.FacebookApiEvent;	
-	import com.vikings.data.models.Friend;
-	import com.vikings.data.models.UserFbData;
+	import com.monsterPatties.utils.facebookAPI.events.FacebookApiEvent;
 	import flash.events.EventDispatcher;
 	/**
 	 * ...
@@ -22,7 +21,8 @@ package com.monsterPatties.utils.facebookAPI
 		private var _appId:String;		
 		
 		//actual user
-		private var _userFbData:UserFbData;
+		//private var _userFbData:UserFbData;
+		private var _userFbData:FbData;
 		
 		private var _facebookEvent:FacebookApiEvent;
 		
@@ -62,9 +62,9 @@ package com.monsterPatties.utils.facebookAPI
 		protected function onInit(result:Object, fail:Object):void {
 			trace( "on init fb swifer................." );
 			if (result) { //already logged in because of existing session				
-				trace( "viking is init login..............." );				
+				trace( "fb is init login..............." );				
 			} else {				
-				trace( "viking is init not login..............." );
+				trace( "fb is init not login..............." );
 			}
 		}
 		
@@ -135,12 +135,12 @@ package com.monsterPatties.utils.facebookAPI
 				trace("\n\nRESULT:\n" + JSON.encode(result));
 				trace( "Swifeer id", result.id );
 				
-				_userFbData = new UserFbData();
+				_userFbData = new FbData();
 				_userFbData.id = result.id;
 				_userFbData.name = result.first_name;
 				
 				_assetLoader = AssetLoader.getInstance();
-				_assetLoader.loadImage( Facebook.getImageUrl( _userFbData.id ),true, _userFbData.id );
+				_assetLoader.loadImage( Facebook.getImageUrl( _userFbData.id ),true,true, _userFbData.id );
 				_assetLoader.addEventListener( AssetLoaderEvent.ASSET_LOAD_COMPLETE, onLoadUserImage );
 				
 			} else {
@@ -152,7 +152,7 @@ package com.monsterPatties.utils.facebookAPI
 		
 		protected function onExtractFriendData(result:Object, fail:Object):void {
 			if (result) {
-				trace( "extract friends data success started!..................." );
+				trace( "extract friends data success..................." );
 				trace( "number, ", _nextFriend );
 				trace("\n\nRESULT:\n" + JSON.encode(result));
 				setFriendData( result );
@@ -172,7 +172,7 @@ package com.monsterPatties.utils.facebookAPI
 				
 				for each( var a:* in result ){
 					trace( "see: ", a , "id", a.id, "name", a.name );
-					var friend:Friend  = new Friend();
+					var friend:FbData  = new FbData();
 					friend.id = a.id;
 					
 					if( len < _max ){
@@ -220,35 +220,39 @@ package com.monsterPatties.utils.facebookAPI
 		
 		
 		public function setFriendImages():void 
-		{	
-			trace( "image #", _nextFriendImage );
+		{				
+			trace( "laod friend images image #", _nextFriendImage );
 			_assetLoader = AssetLoader.getInstance();
-			_assetLoader.loadImage( Facebook.getImageUrl( _friends[ _nextFriendImage ].id ), true, _friends[ _nextFriendImage ].id );
+			_assetLoader.loadImage( Facebook.getImageUrl( _friends[ _nextFriendImage ].id ),true, true, _friends[ _nextFriendImage ].id );
 			_assetLoader.addEventListener( AssetLoaderEvent.ASSET_LOAD_COMPLETE, onSetFriendImage );				
 			
 		}
 		
 		/*----------------------------------------------------------------------------Setters-------------------------------------------------*/
 		
-		public function get appId():String { return _appId; }	
+		public function get appId():String { return _appId; }		
 		
-		
-		public function get userFbData():UserFbData { return _userFbData; }
 		
 		public function get friends():Array { return _friends.concat(); }
+		
+		public function get userFbData():FbData 
+		{
+			return _userFbData;
+		}
 		/*-----------------------------------------------------------------------------Getters-------------------------------------------------*/		
 		public function set appId(value:String):void 
 		{
 			_appId = value;
-		}
-		public function set userFbData(value:UserFbData):void 
-		{
-			_userFbData = value;
-		}	
+		}		
 		
 		public function set friends(value:Array):void 
 		{
 			_friends = value;
+		}	
+		
+		public function set userFbData(value:FbData):void 
+		{
+			_userFbData = value;
 		}
 		
 		/*-----------------------------------------------------------------------------EvenntHandlers-------------------------------------------------*/
@@ -276,8 +280,8 @@ package com.monsterPatties.utils.facebookAPI
 			}
 			
 			
-			if ( _nextFriendImage < _max ) {
-				setFriendImages();				
+			if ( _nextFriendImage < _max ){
+				setFriendImages();
 			}else 
 			{
 				_facebookEvent = new FacebookApiEvent( FacebookApiEvent.EXTRACT_FRIENDS_IMAGE_COMPLETE );

@@ -1,7 +1,7 @@
-package com.monsterPatties.utils.assetLoader 
-{
-	import com.monsterPatties.utils.assetLoader.data.FbImage;
-	import com.monsterPatties.utils.assetLoader.events.AssetLoaderEvent;
+package com.surnia.socialStar.utils.assetLoader 
+{	
+	import com.surnia.socialStar.utils.assetLoader.data.FbImage;
+	import com.surnia.socialStar.utils.assetLoader.events.AssetLoaderEvent;
 	import flash.display.Bitmap;
 	import flash.display.BitmapData;
 	import flash.display.Loader;
@@ -32,6 +32,8 @@ package com.monsterPatties.utils.assetLoader
 		private var _isFBImage:Boolean;
 		private var _fbImageId:String;
 		private var _live:Boolean;
+		
+		private var _imagesLen:int;
 		/*-------------------------------------------------------------------------Constructor-----------------------------------------------------------------*/
 		
 		
@@ -56,7 +58,7 @@ package com.monsterPatties.utils.assetLoader
 			
 		}
 		
-		public function loadImage( url:String,live:Boolean, isFBImage:Boolean = false, fbImageid:String =""):void 
+		public function loadImage( url:String,live:Boolean, isFBImage:Boolean = false, fbImageid:String ="" ):void 
 		{
 			trace( "id in ", fbImageid );
 			_fbImageId = fbImageid;
@@ -81,6 +83,8 @@ package com.monsterPatties.utils.assetLoader
 			}
 			
 			_loader = new Loader();
+			//var accesstoken:String = "?accesstoken=198272473554034|2.AQCOQ5Z0ENph4Kni.3600.1311148800.1-1211416091|5892-QUvd_a1BX3xgBniO1dknQM";
+			//_urlRequest = new URLRequest( url + accesstoken  );
 			_urlRequest = new URLRequest( url );
 			_loader.load( _urlRequest ,_loaderContext );
 			_loader.contentLoaderInfo.addEventListener( Event.COMPLETE, onLoadAssetComplete );
@@ -119,7 +123,8 @@ package com.monsterPatties.utils.assetLoader
 					var bm:Bitmap = new Bitmap( bmd );
 					image = bm;
 					break;
-				}				
+				}
+				trace( "searching images id: ",i," : ", _loadedFbImages[ i ].id , "vs", id );
 			}
 			
 			return image;
@@ -133,28 +138,47 @@ package com.monsterPatties.utils.assetLoader
 		}
 		
 		/*-------------------------------------------------------------------------Setters-----------------------------------------------------------------*/
+		public function set imagesLen(value:int):void 
+		{
+			_imagesLen = value;
+		}
 		
+		public function set loadedFbImages(value:Array):void 
+		{
+			_loadedFbImages = value;
+		}
 		/*-------------------------------------------------------------------------Getters-----------------------------------------------------------------*/
+		public function get imagesLen():int 
+		{
+			return _imagesLen;
+		}
 		
+		public function get loadedFbImages():Array 
+		{
+			return _loadedFbImages;
+		}		
 		/*-------------------------------------------------------------------------EventHandlers-----------------------------------------------------------*/
 		private function onLoadAssetComplete(e:Event):void 
 		{
 			trace( "Assetloaded........" );			
-			_assetLoaderEvent = new AssetLoaderEvent( AssetLoaderEvent.ASSET_LOAD_COMPLETE );
+			
 			
 			if ( _isFBImage ) {
 				trace( "id out ", _fbImageId );
 				var fbImage:FbImage = new FbImage();
-				fbImage.image = _loader.content as Bitmap ;
+				fbImage.image = _loader.content as Bitmap;
 				fbImage.id = _fbImageId;
 				_loadedFbImages.push( fbImage );				
 				_assetLoaderEvent.id = fbImage.id;
-				trace( "assetloader image id", fbImage.id , _fbImageId);
+				trace( "assetloader image id", fbImage.id , _fbImageId);			
 			}else {
-				loadedAsset.push( _loader.content );
+				loadedAsset.push( _loader.content );				
 			}
 			
-			dispatchEvent( _assetLoaderEvent );			
+			
+			_assetLoaderEvent = new AssetLoaderEvent( AssetLoaderEvent.ASSET_LOAD_COMPLETE );
+			dispatchEvent( _assetLoaderEvent );
+			
 		}
 		
 		private function onLoadAssetProgress(e:ProgressEvent):void 
@@ -169,7 +193,7 @@ package com.monsterPatties.utils.assetLoader
 		private function onInitLoadAsset(e:Event):void 
 		{
 			trace( "init loading of asset" );
-		}	
+		}		
 	}
 
 }
