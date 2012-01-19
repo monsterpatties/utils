@@ -47,7 +47,7 @@ in this class you will addChild your GameEngine class ( still remember it? if no
 
 7. now the you know some of the basics you can now starting making your game.
 
-8. if  you have any problems or questions just email me @ swifer_07@yahoo.com or txt me @ +639053778231 or 09053778231 ( Globe )
+8. if  you have any problems or questions just email me @ swifer_07@yahoo.com / swifer05@gmail.com,  or txt me @ +639053778231 or 09053778231 ( Globe - Philippines )
 
 
 9. every basic aspect is layout to you so you just have to do is focus on the gameplay and game mechanics ok have fun ^^)
