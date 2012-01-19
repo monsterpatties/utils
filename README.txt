@@ -1,25 +1,12 @@
-THIS UTILS IS FOR AS3 GAMES
-
-for bug report, error and question just email me @ swifer_07@yahoo.com or swifer05@gmail.com	
-
-how to use
-
-1. create a new project in flashdevelope with preloader
-2. copy and paste src and lib folders
-3. add all swc library in lib folder to your project
-4. run the project
-5. enjoy!
-
-
-monsterpatties framework version 1.0
+monsterpatties framework version 1.1
 01/18/2012 - 9:36am
 by: monsterpatties
+
 
 
 ===================================
 Benefits for using this frame work:
 ===================================
-
 
 
 1. this frame work is for the essential part only of a game like window manager, sound manager, some data manager, keyboard manager and some basic tools and utils.
@@ -32,6 +19,7 @@ Benefits for using this frame work:
 
 5. some basic GUI is ready to use also like SoundUI, ScoreUI, TimeUI, LifeUI.
 
+6. easy integration on flash game portals like mochimedia and kongregate, meaning you can integate your game in this portal in lighting speed just go to src/com.monsterPatties/controllers/GameController this one is for mochimedia api and for kongregate just go to utils/Kong.
 
 
 ================
@@ -62,7 +50,7 @@ in this class you will addChild your GameEngine class ( still remember it? if no
 8. if  you have any problems or questions just email me @ swifer_07@yahoo.com or txt me @ +639053778231 or 09053778231 ( Globe )
 
 
-9. ok have fun ^^)
+9. every basic aspect is layout to you so you just have to do is focus on the gameplay and game mechanics ok have fun ^^)
 
 
 
