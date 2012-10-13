@@ -20,15 +20,15 @@ package com.monsterPatties.utils.siteLocker
 		}
 		
 		/*------------------------------------------------------------------Methods--------------------------------------------*/
-		public function locked( arr:Array, loaderInfo:LoaderInfo ):Boolean 
-		{
-			var valid:Boolean;		
-			
-			//var siteArray:Array = [ "flashgamelicense.com", "monsterpatties.net", "kongregate.com" ];
-			var siteArray:Array = arr;
+		public function locked( arr:Array, info:LoaderInfo ):Boolean 
+		{			
+			var valid:Boolean;
+			var siteArray:Array = arr;			
 		
-			for ( var a:* in siteArray ){				
-				if ( loaderInfo.url.indexOf( siteArray[ a ] ) >= 0  ) {
+			for ( var a:* in siteArray ){
+				trace( "[SiteLocker]: see site", siteArray[ a ], "index of: ", info.url.indexOf( siteArray[ a ] ) );
+				if ( info.url.indexOf( siteArray[ a ] ) >= 0  ) {
+					trace( "[SiteLocker]: valid website / machine", siteArray[ a ] );
 					valid = true;
 					break;
 				}

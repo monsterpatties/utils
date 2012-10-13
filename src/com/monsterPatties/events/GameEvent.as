@@ -13,7 +13,25 @@ package com.monsterPatties.events
 		public static const GAME_OVER:String = "GAME_OVER";
 		public static const GAME_EXIT:String = "GAME_EXIT";
 		public static const GAME_PAUSED:String = "GAME_PAUSED";
+		public static const GAME_OUT_FOCUS:String = "GAME_OUT_FOCUS";
+		public static const GAME_GOT_FOCUS:String = "GAME_GOT_FOCUS";
 		public static const GAME_UNPAUSED:String = "GAME_UNPAUSED";
+		
+		public static const GAME_DEACTIVATE_CONTROLS:String = "GAME_DEACTIVATE_CONTROLS";
+		public static const GAME_ACTIVATE_CONTROLS:String = "GAME_ACTIVATE_CONTROLS";
+		
+		public static const SHOW_PAUSED_SCREEN:String = "SHOW_PAUSED_SCREEN";		
+		public static const SHOW_GAME_SETTING:String = "SHOW_GAME_SETTING";
+		
+		//public static const LEVEL_START:String = "LEVEL_START";
+		//public static const LEVEL_COMPLETE:String = "LEVEL_COMPLETE";
+		//public static const LEVEL_FAILED:String = "LEVEL_FAILED";
+		//public static const RESTART_LEVEL:String = "RESTART_LEVEL";
+		//public static const GAME_COMPLETE:String = "GAME_COMPLETE";		
+		//public static const LOAD_LEVEL:String = "LOAD_LEVEL";
+		//public static const REMOVE_MESSAGE_SCREEN:String = "REMOVE_MESSAGE_SCREEN";		
+        //public static const COLLECT_ITEM:String = "COLLECT_ITEM";
+        //public static const GOAL_COMPLETE:String = "GOAL_COMPLETE";	
 		/*-----------------------------------------------------------------Properties---------------------------------------------------------------*/
 		private var _obj:Object = new Object();
 		/*-----------------------------------------------------------------Constructor---------------------------------------------------------------*/

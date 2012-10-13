@@ -1,5 +1,6 @@
 ﻿package com.monsterPatties.utils.displayManager
 {	
+	import com.monsterPatties.config.GameConfig;
 	import com.monsterPatties.utils.displayManager.event.DisplayManagerEvent;	
 	import com.monsterPatties.utils.eventSatellite.EventSatellite;
 	import flash.display.DisplayObject;
@@ -76,7 +77,7 @@
 				//trace( whichScreen + " Does not exist..." );
 			}else{			
 				if ( _subScreenHolder != null ) {					
-					_subScreenHolder.addChild( obj.screen );
+					_subScreenHolder.addChild( obj.screen );					
 					obj.screen.initWindow();
 					_displayManagerEvent = new DisplayManagerEvent( DisplayManagerEvent.LOAD_SCREEN );
 					_displayManagerEvent.windowName = _currentScreen.windowName;
@@ -90,6 +91,8 @@
 			searchSubScreen( whichScreen, true, false );
 		}
 		
+        //note:
+        ///only one major screen can be active at a time if you want to add more window user add loadSubWindow
 		public function loadScreen( whichScreen:String ):void {
 			
 			if ( _currentScreen != null ) {

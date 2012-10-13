@@ -9,6 +9,8 @@
 		/*--------------------------------------Screen-----------------------------------------*/
 		public static const PRELOADER_SCREEN:String = "PRELOADER_SCREEN";
 		public static const PAUSED_SCREEN:String = "PAUSED_SCREEN";
+		public static const SETTING_SCREEN:String = "SETTING_SCREEN";
+		public static const LOST_FOCUS_SCREEN:String = "LOST_FOCUS_SCREEN";
 		public static const TITLE_SCREEN:String = "TITLE_SCREEN";
 		public static const OPTION_SCREEN:String = "OPTION_SCREEN";
 		public static const GAME_SCREEN:String = "GAME_SCREEN";
@@ -25,6 +27,15 @@
 		public static const LEVEL_SELECTION_SCREEN:String = "LEVEL_SELECTION_SCREEN";
 		public static const POP_UP_WINDOW_MESSAGE:String = "POP_UP_WINDOW_MESSAGE";
 		public static const POP_UP_WINDOW_QUESTION:String = "POP_UP_WINDOW_QUESTION";
+		public static const CPM_STAR_WINDOW:String = "CPM_STAR_WINDOW";
+		public static const TUTORIAL_WINDOW:String = "TUTORIAL_WINDOW";
+		public static const STATUS_WINDOW:String = "STATUS_WINDOW";
+		public static const SHOP_WINDOW:String = "SHOP_WINDOW";
+		public static const LOSE_POP_WINDOW:String = "LOSE_POP_WINDOW";
+		public static const WIN_POP_WINDOW:String = "WIN_POP_WINDOW";
+		public static const LOGO_POP_WINDOW:String = "LOGO_POP_WINDOW";
+        public static const SPLASH_POP_WINDOW:String = "SPLASH_POP_WINDOW";
+        public static const SCORE_BOARD_WINDOW:String = "SCORE_BOARD_WINDOW";
 		/*--------------------------------------Screen-----------------------------------------*/
 	}
 

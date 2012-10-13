@@ -1,6 +1,8 @@
 package com.monsterPatties.controllers 
 {	
+	import com.greensock.easing.Strong;
 	import com.monsterPatties.config.GameConfig;	
+	import flash.display.DisplayObject;
 	import flash.display.MovieClip;
 	import flash.display.Sprite;
 	import flash.events.Event;
@@ -73,6 +75,11 @@ package com.monsterPatties.controllers
 			//var boardID:String = o.f(0,"");
 			//MochiScores.showLeaderboard( { boardID: boardID, score: playerscore } );		
 			MochiScores.showLeaderboard( { boardID:_leaderBoardId, score: playerscore } );
+		}
+		
+		public function showHighScores( leaderBoardId:String ):void 
+		{			
+			MochiScores.showLeaderboard( { boardID:leaderBoardId } );			
 		}
 		
 		public function startGamePlay():void 
@@ -184,7 +191,7 @@ package com.monsterPatties.controllers
 			MochiSocial.inviteFriends( obj );
 		}
 		
-		private function gotoSponsorUrl( url:String ):void 
+		public function gotoSponsorUrl( url:String ):void 
 		{
 			// var request:URLRequest = new URLRequest("http://www.games1.com/?utm_medium=brandedgames_external&utm_campaign=santa-coming&utm_source=host&utm_content=ingame");			
 			var request:URLRequest = new URLRequest(url);
@@ -205,8 +212,14 @@ package com.monsterPatties.controllers
 		public function gotoMySiteUsingMoreGameBtn( btn:MovieClip ):void 
 		{
 			MochiServices.addLinkEvent('http://x.mochiads.com/link/dac25f133a231589', 'http://monsterpatties.net',btn );
-			gotoSponsorUrl( "http://www.monsterpatties.net/" );
+			gotoSponsorUrl( "http://www.monsterpatties.net/" );			
 		}
+		
+		//new 03/15/2012
+		public function btnClickTracker( btn:*, trackerId:String   ):void 
+		{
+			MochiServices.addLinkEvent( "http://x.mochiads.com/link/" + trackerId, 'http://monsterpatties.net', btn );			
+		}	
 		
 		/*---------------------------------------------------------------Getters-----------------------------------------------------------*/
 		

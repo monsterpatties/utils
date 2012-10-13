@@ -34,18 +34,21 @@ package com.monsterPatties.utils.buttonManager
 			_buttons.push( btn );
 			btn.addEventListener( MouseEvent.ROLL_OVER, onRolloverBtn );
 			btn.addEventListener( MouseEvent.ROLL_OUT, onRolloutBtn );
-			btn.addEventListener( MouseEvent.MOUSE_DOWN, onMouseDownBtn );
+			btn.addEventListener( MouseEvent.MOUSE_DOWN, onMouseDownBtn )
+			btn.addEventListener( MouseEvent.MOUSE_UP, onMouseUpBtn );;
 			btn.addEventListener( MouseEvent.CLICK, onClickBtn );
-		}		
-		
+			btn.addEventListener( MouseEvent.MOUSE_MOVE, onMouseMoveBtn );
+		}				
 		
 		public function removeBtnListener( btn:Object ):void {
 			btn.buttonMode = false;
 			btn.removeEventListener( MouseEvent.ROLL_OVER, onRolloverBtn );
 			btn.removeEventListener( MouseEvent.ROLL_OUT, onRolloutBtn );
 			btn.removeEventListener( MouseEvent.MOUSE_DOWN, onMouseDownBtn );
+			btn.removeEventListener( MouseEvent.MOUSE_UP, onMouseUpBtn );
 			btn.removeEventListener( MouseEvent.CLICK, onClickBtn );
-		}
+			btn.removeEventListener( MouseEvent.MOUSE_MOVE, onMouseMoveBtn );
+		}		
 		
 		public function clearButtons():void 
 		{
@@ -107,7 +110,40 @@ package com.monsterPatties.utils.buttonManager
 			
 			for each ( var obj:* in _buttons ) 
 			{				
-				if ( btnName == obj.name ){					
+				if ( btnName == obj.name ) {
+					_buttonEvent = new ButtonEvent( ButtonEvent.MOUSE_DOWN_BUTTON);
+					_buttonEvent.obj.name = obj.name;
+					dispatchEvent( _buttonEvent );
+					break;
+				}
+			}
+		}
+		
+		private function onMouseMoveBtn(e:MouseEvent):void 
+		{
+			var btnName:String = e.currentTarget.name;			
+			
+			for each ( var obj:* in _buttons ) 
+			{				
+				if ( btnName == obj.name ) {
+					_buttonEvent = new ButtonEvent( ButtonEvent.MOUSE_MOVE_BUTTON);
+					_buttonEvent.obj.name = obj.name;
+					dispatchEvent( _buttonEvent );
+					break;
+				}
+			}
+		}
+		
+		private function onMouseUpBtn(e:MouseEvent):void 
+		{
+			var btnName:String = e.currentTarget.name;			
+			
+			for each ( var obj:* in _buttons ) 
+			{				
+				if ( btnName == obj.name ) {
+					_buttonEvent = new ButtonEvent( ButtonEvent.MOUSE_UP_BUTTON);
+					_buttonEvent.obj.name = obj.name;
+					dispatchEvent( _buttonEvent );
 					break;
 				}
 			}

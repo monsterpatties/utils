@@ -17,6 +17,9 @@ package com.monsterPatties.utils.buttonManager.events
 		public static const CLICK_BUTTON:String = "CLICK_BUTTON";
 		public static const ROLL_OVER_BUTTON:String = "ROLL_OVER_BUTTON";
 		public static const ROLL_OUT_BUTTON:String = "ROLL_OUT_BUTTON";
+		public static const MOUSE_DOWN_BUTTON:String = "MOUSE_DOWN_BUTTON";
+		public static const MOUSE_MOVE_BUTTON:String = "MOUSE_MOVE_BUTTON";
+		public static const MOUSE_UP_BUTTON:String = "MOUSE_UP_BUTTON";
 		
 		public function ButtonEvent(type:String, bubbles:Boolean=false, cancelable:Boolean=false) 
 		{ 

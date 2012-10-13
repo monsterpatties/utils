@@ -151,6 +151,8 @@ package com.monsterPatties.utils.soundManager
 			
 			if ( obj != null ) {
 				_soundEffect = obj.sfx;
+				_sfxVol = obj.vol;
+				setSfxVolume( _sfxVol );
 			}else {
 				throw( "SoundManagerError: select sfx Invalid id!" );
 			}			
@@ -219,7 +221,7 @@ package com.monsterPatties.utils.soundManager
 		
 		public function playBgMusic( loop:Boolean = true ):void
 		{	
-			if ( !_bgmIsPlaying ) {
+			if ( !_bgmIsPlaying && !bgmOff && _bgmVol > 0 ) {
 				_bgmIsPlaying = true;
 				_loopBgMusic = loop;
 				
@@ -280,23 +282,25 @@ package com.monsterPatties.utils.soundManager
 		
 		
 		public function playSoundSfx( loop:Boolean = false  ):void 
-		{
-			_isSfxLoop = loop;
-			
-			if ( ( _playingSfx + 1 ) < 30 && _soundEffect != null ){
-				if ( _sfxSoundTransForm != null ) {
-					try {
-						_playingSfx++;
-						_sfxStillPlaying = true;
-						_soundEffectChannel_1 = _soundEffect.play();
-						_soundEffectChannel_1.soundTransform = _sfxSoundTransForm;
-						_soundEffectChannel_1.addEventListener( Event.SOUND_COMPLETE, onSoundEffectComplete );
-					}catch (err:Error)
-					{
-						trace( "soundManager Error: playsfx"  );
-					}
-					
-				}				
+		{			
+			if( !_sfxOff && _sfxVol > 0 ){
+				_isSfxLoop = loop;
+				
+				if ( ( _playingSfx + 1 ) < 30 && _soundEffect != null ){
+					if ( _sfxSoundTransForm != null ) {
+						try {
+							_playingSfx++;
+							_sfxStillPlaying = true;
+							_soundEffectChannel_1 = _soundEffect.play();
+							_soundEffectChannel_1.soundTransform = _sfxSoundTransForm;
+							_soundEffectChannel_1.addEventListener( Event.SOUND_COMPLETE, onSoundEffectComplete );
+						}catch (err:Error)
+						{
+							trace( "soundManager Error: playsfx"  );
+						}
+						
+					}				
+				}
 			}
 		}		
 		
@@ -375,7 +379,7 @@ package com.monsterPatties.utils.soundManager
 			dispatchEvent( _soundManagerEvent );
 		}
 		
-		public function loadSfx( id:String , sfx:*  ):void 
+		public function loadSfx( id:String , sfx:*, vol:Number = 1 ):void 
 		{
 			//var obj:Object = new Object();
 			//obj.id = id;
@@ -388,6 +392,7 @@ package com.monsterPatties.utils.soundManager
 				var obj:Object = new Object();
 				obj.id = id;
 				obj.sfx = sfx;
+				obj.vol = vol;
 				_soundSfxList.push( obj );
 			}else {
 				//throw( "SoundManagerError: bgm id that you load is in used please use different!" );
@@ -423,6 +428,16 @@ package com.monsterPatties.utils.soundManager
 		public function get bgmOff():Boolean { return _bgmOff; }		
 		
 		public function get sfxOff():Boolean { return _sfxOff; }
+		
+		public function get sfxStillPlaying():Boolean 
+		{
+			return _sfxStillPlaying;
+		}
+		
+		public function get bgmIsPlaying():Boolean 
+		{
+			return _bgmIsPlaying;
+		}
 		/*-------------------------------------------------------------------Setters---------------------------------------------------------------------*/
 		public function set bgmOff(value:Boolean):void 
 		{
@@ -432,6 +447,16 @@ package com.monsterPatties.utils.soundManager
 		public function set sfxOff(value:Boolean):void 
 		{
 			_sfxOff = value;
+		}		
+		
+		public function set sfxStillPlaying(value:Boolean):void 
+		{
+			_sfxStillPlaying = value;
+		}	
+		
+		public function set bgmIsPlaying(value:Boolean):void 
+		{
+			_bgmIsPlaying = value;
 		}
 		
 		

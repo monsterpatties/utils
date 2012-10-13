@@ -30,6 +30,7 @@ package com.monsterPatties.ui
 		private var _es:EventSatellite;
 		private var _timerUIEvent:TimerUiEvent;
 		private var _isCountDown:Boolean;
+		private var _isStarted:Boolean;
 		/*-------------------------------------------------------------------Constructor-------------------------------------------------------------------*/
 		
 		public function TimerUI( xpos:Number, ypos:Number, delay:int, isCountDown:Boolean, hr:int = 0, min:int = 0, sec:int = 0  ) 
@@ -208,7 +209,7 @@ package com.monsterPatties.ui
 		
 		public function startTimer():void 
 		{
-			if( _timer != null ){
+			if( _timer != null && !_isStarted ){
 				_timer.start();		
 				_timer.addEventListener( TimerEvent.TIMER, onTick );
 			}
@@ -284,6 +285,10 @@ package com.monsterPatties.ui
 		/*-------------------------------------------------------------------EventHandlers----------------------------------------------------------------*/
 		private function onTick(e:TimerEvent):void 
 		{
+			if ( !_isStarted ) {
+				_isStarted = true;
+			}
+			
 			update();
 		}	
 	}

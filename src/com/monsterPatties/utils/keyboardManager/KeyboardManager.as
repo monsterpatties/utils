@@ -47,10 +47,12 @@ package com.monsterPatties.utils.keyboardManager
 		
 		private function removeKeyboardListener(  ):void 
 		{
-			_stage.removeEventListener( KeyboardEvent.KEY_DOWN, onKeyboardDown );
-			_stage.removeEventListener( KeyboardEvent.KEY_UP, onKeyboardUp );
-			_keys = null;
-			_stage = null;
+			if ( _stage.hasEventListener( KeyboardEvent.KEY_DOWN ) &&  _stage.hasEventListener( KeyboardEvent.KEY_UP ) && _stage != null ) {
+				_stage.removeEventListener( KeyboardEvent.KEY_DOWN, onKeyboardDown );
+				_stage.removeEventListener( KeyboardEvent.KEY_UP, onKeyboardUp );
+				_keys = null;
+				_stage = null;
+			}		
 		}
 		
 		/*

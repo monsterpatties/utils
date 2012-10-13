@@ -31,8 +31,7 @@ package com.monsterPatties.utils.eventSatellite
 		/*-------------------------------------------------------------------------Method--------------------------------------------------------------------*/
 		public function init():void 
 		{
-			_events = new Dictionary();
-			trace( "es ww" );
+			_events = new Dictionary();			
 		}
 		
 		
@@ -61,7 +60,7 @@ package com.monsterPatties.utils.eventSatellite
 			var obj:Object = searchEvent( event );
 			
 			if ( obj.found ) {
-				trace( "dispatched event...........................", obj.event ); 
+				//trace( "dispatched event...........................", obj.event ); 
 				if( val != null ){
 					obj.event.obj = val;
 				}

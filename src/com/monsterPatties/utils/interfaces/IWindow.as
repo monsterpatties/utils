@@ -1,7 +1,5 @@
 package com.monsterPatties.utils.interfaces 
 {
-	import flash.display.MovieClip;
-	import flash.display.Sprite;
 	
 	/**
 	 * ...

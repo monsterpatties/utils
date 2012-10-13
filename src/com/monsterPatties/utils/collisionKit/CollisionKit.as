@@ -48,6 +48,21 @@ package com.monsterPatties.utils.collisionKit
 			}
 		}
 		
+		public function circleCollisionUpward( obj1:*, obj2:*, advance:int = 0  ):Boolean 
+		{			
+			var vx:Number = obj2.x - obj1.x;
+			var vy:Number = obj2.y - obj1.y;
+			var hitArea:Number = ( obj1.width / 2 )  +  (  obj2.width / 2  );
+			var len:Number = Math.sqrt( vx * vx + vy * vy );
+			
+			
+			if (len < ( hitArea + advance ) ) {	
+				return true;
+			}else {
+				return false;
+			}
+		}       
+		
 		public function hitTestObject( obj1:*, obj2:* ):Boolean 
 		{			
 			if ( obj1.hitTestObject( obj2 ) ) {

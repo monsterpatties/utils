@@ -31,12 +31,17 @@ package com.monsterPatties.controllers
 		private var _muteBgm:Boolean;
 		private var _muteSfx:Boolean;
 		
+		public var wIsPressed:Boolean;
+		public var aIsPressed:Boolean;
+		public var sIsPressed:Boolean;
+		public var dIsPressed:Boolean;
+		
 		private var _stage:DisplayObject;
 		private var _gameEvent:GameEvent;		
 		
 		private var _es:EventSatellite;
 		private var _gdc:GameDataController;
-		private var _gc:GameController; 
+		private var _gc:MochiController; 
 		
 		/*-------------------------------------------------------------------------Constructor----------------------------------------------------------------*/
 		public function GameKeyInput( enforcer:SingletonEnforcer ) 
@@ -60,7 +65,7 @@ package com.monsterPatties.controllers
 			_stage = stage;
 			_gdc = GameDataController.getInstance();
 			_es = EventSatellite.getInstance();
-			_gc = GameController.getInstance();
+			_gc = MochiController.getInstance();
 			
 			_kbManager = new KeyboardManager( _stage );			
 			_kbManager.addEventListener( KeyboardManagerEvent.KEY_DOWN, onKeyDown );
@@ -217,8 +222,20 @@ package com.monsterPatties.controllers
 					_minusIsPressed = false;
 				break;				
 				
+				case "W":
+					wIsPressed = false;
+				break;
+				
 				case "A":
-					trace( "A...." );					
+					aIsPressed = false;
+				break;
+				
+				case "S":
+					sIsPressed = false;
+				break;
+				
+				case "D":
+					dIsPressed = false;
 				break;
 				
 				default:
@@ -230,7 +247,7 @@ package com.monsterPatties.controllers
 		private function onKeyDown(e:KeyboardManagerEvent):void 
 		{
 			var gameEvent:GameEvent;			
-			trace( "titlescreen key detect", e.key );
+			//trace( "GameKeyInput key detect", e.key );
 			
 			switch ( e.key ) 
 			{
@@ -287,10 +304,23 @@ package com.monsterPatties.controllers
 				break;
 				
 				case "W":
-					_gc.gotoMyWalkThrough();
+					wIsPressed = true;
+				break;
+				
+				case "A":
+					aIsPressed = true;
+				break;
+				
+				case "S":
+					sIsPressed = true;
+				break;
+				
+				case "D":
+					dIsPressed = true;
 				break;
 				
 				case "P":
+				trace( "p is pressed game key inmput" );
 					if( !_gdc.getPausedGame() ){
 						gameEvent = new GameEvent( GameEvent.GAME_PAUSED );
 						_gdc.setPausedGame( true );
