@@ -5,7 +5,7 @@ by: monsterpatties
 
 
 ===================================
-Benefits for using this frame work:
+Benefits for using this frame work: 
 ===================================
 
 
@@ -52,5 +52,5 @@ in this class you will addChild your GameEngine class ( still remember it? if no
 
 9. every basic aspect is layout to you so you just have to do is focus on the gameplay and game mechanics ok have fun ^^)
 
-
+warning this is not working!
 
